@@ -14,6 +14,7 @@ const SIGHTS = [
     id: 1,
     name: "Братская могила",
     emoji: "🕯️",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/00e2aa9d-d7bc-4dee-933e-7e34cfaef7f6.jpg",
     address: "ул. Будённого, пос. Холмечи",
     mapUrl: "https://yandex.ru/maps/?text=улица+Будённого+посёлок+Холмечи+Брянская+область",
     desc: "Захоронение 21 воина Советской Армии и партизан, павших в годы Великой Отечественной войны. Место памяти и скорби — символ мужества защитников Холмечи.",
@@ -23,6 +24,7 @@ const SIGHTS = [
     id: 2,
     name: "Церковь Тихвинской иконы Божией Матери",
     emoji: "⛪",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/88e02391-4e8a-4791-8635-78ba709fd0b1.jpg",
     address: "Вокзальная улица, 11, пос. Холмечи",
     mapUrl: "https://yandex.ru/maps/?text=Вокзальная+улица+11+посёлок+Холмечи+Брянская+область",
     desc: "Православный храм посёлка Холмечи, посвящённый чудотворной Тихвинской иконе Божией Матери — одной из главных православных святынь России.",
@@ -527,56 +529,59 @@ export default function Index() {
             {SIGHTS.map((sight, i) => (
               <div
                 key={sight.id}
-                className="section-card p-7 flex flex-col gap-4 cursor-pointer transition-all duration-200"
+                className="section-card overflow-hidden flex flex-col cursor-pointer transition-all duration-200"
                 style={{
                   outline: selectedPin === sight.id ? "2px solid var(--wheat)" : "2px solid transparent",
                 }}
                 onClick={() => setSelectedPin(selectedPin === sight.id ? null : sight.id)}
               >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="text-4xl flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm"
-                    style={{ backgroundColor: "var(--fog)" }}
-                  >
-                    {sight.emoji}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span
-                        className="font-body text-xs font-semibold px-2 py-0.5 rounded-full"
-                        style={{ backgroundColor: "var(--wheat)", color: "var(--earth)" }}
-                      >
-                        №{i + 1}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-xl font-semibold leading-tight" style={{ color: "var(--earth)" }}>
-                      {sight.name}
-                    </h3>
-                    <a
-                      href={sight.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 mt-1 hover:opacity-70 transition-opacity"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span className="text-xs">📍</span>
-                      <span className="font-body text-xs underline underline-offset-2" style={{ color: "var(--wheat)" }}>{sight.address}</span>
-                    </a>
-                  </div>
+                {/* Фото */}
+                <div className="relative overflow-hidden" style={{ height: "220px" }}>
+                  <img
+                    src={sight.photo}
+                    alt={sight.name}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(92,61,46,0.55) 0%, transparent 50%)" }} />
+                  <div className="absolute bottom-3 left-4 text-3xl">{sight.emoji}</div>
                 </div>
-                <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>
-                  {sight.desc}
-                </p>
-                {selectedPin === sight.id && (
-                  <div
-                    className="rounded-xl p-4 mt-1 animate-fade-slide"
-                    style={{ backgroundColor: "var(--fog)", borderLeft: "3px solid var(--wheat)" }}
-                  >
-                    <p className="font-body text-sm leading-relaxed" style={{ color: "var(--earth)" }}>
-                      {sight.detail}
-                    </p>
+
+                <div className="p-6 flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="font-body text-xs font-semibold px-2 py-0.5 rounded-full"
+                      style={{ backgroundColor: "var(--wheat)", color: "var(--earth)" }}
+                    >
+                      №{i + 1}
+                    </span>
                   </div>
-                )}
+                  <h3 className="font-display text-xl font-semibold leading-tight" style={{ color: "var(--earth)" }}>
+                    {sight.name}
+                  </h3>
+                  <a
+                    href={sight.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="text-xs">📍</span>
+                    <span className="font-body text-xs underline underline-offset-2" style={{ color: "var(--wheat)" }}>{sight.address}</span>
+                  </a>
+                  <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>
+                    {sight.desc}
+                  </p>
+                  {selectedPin === sight.id && (
+                    <div
+                      className="rounded-xl p-4 animate-fade-slide"
+                      style={{ backgroundColor: "var(--fog)", borderLeft: "3px solid var(--wheat)" }}
+                    >
+                      <p className="font-body text-sm leading-relaxed" style={{ color: "var(--earth)" }}>
+                        {sight.detail}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
