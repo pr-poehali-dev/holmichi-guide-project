@@ -84,6 +84,45 @@ const NATURE_ITEMS = [
   { emoji: "🦅", title: "Богатый птичий мир", desc: "В лесах и на лугах обитают десятки видов птиц. Ранним утром лес наполняется пением — настоящее удовольствие для тех, кто любит природу." },
 ];
 
+const BIRDS = [
+  {
+    name: "Белый аист",
+    latin: "Ciconia ciconia",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/20c80017-6993-4401-a71d-26ee34f22b49.jpg",
+    desc: "Символ удачи и семейного счастья. Гнездится на крышах домов и столбах, прилетает весной из Африки.",
+  },
+  {
+    name: "Зимородок",
+    latin: "Alcedo atthis",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/728425c8-c2da-4a61-aedc-54e4903e127a.jpg",
+    desc: "Ярко-синяя птица с оранжевым брюшком. Обитает по берегам рек, молниеносно ныряет за рыбой.",
+  },
+  {
+    name: "Филин",
+    latin: "Bubo bubo",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/da034a45-99ef-42e6-b5c9-62b20af17597.jpg",
+    desc: "Крупнейшая сова России. Ведёт ночной образ жизни, гнездится в глухих лесах Брянщины.",
+  },
+  {
+    name: "Чёрный дятел",
+    latin: "Dryocopus martius",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/2ad992c4-8133-49fb-a42f-5766e7a02411.jpg",
+    desc: "Самый крупный дятел Европы. Долбит стволы старых деревьев, его стук слышен далеко по лесу.",
+  },
+  {
+    name: "Серый журавль",
+    latin: "Grus grus",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/2e54661e-51e1-4070-a67f-0a0beafe10b2.jpg",
+    desc: "Величественная птица, гнездящаяся на болотах и лугах. Осенью собирается в стаи перед перелётом.",
+  },
+  {
+    name: "Соловей",
+    latin: "Luscinia luscinia",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/e5ac99d2-3666-4133-9dfa-6439110321d4.jpg",
+    desc: "Знаменитый певец русских лесов. Прилетает в мае и наполняет окрестности Холмечи своими трелями.",
+  },
+];
+
 export default function Index() {
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredPin, setHoveredPin] = useState<number | null>(null);
@@ -276,6 +315,43 @@ export default function Index() {
                 <div className="mt-4 h-0.5 w-0 group-hover:w-full transition-all duration-500 rounded" style={{ backgroundColor: "var(--moss)" }} />
               </div>
             ))}
+          </div>
+
+          {/* Птицы Брянской области */}
+          <div className="mt-20">
+            <div className="text-center mb-10">
+              <span className="font-handwritten text-2xl" style={{ color: "var(--moss)" }}>пернатые соседи</span>
+              <h3 className="font-display font-bold mt-2 text-4xl" style={{ color: "var(--earth)" }}>Птицы Брянской области</h3>
+              <div className="flex items-center justify-center gap-4 mt-4 max-w-sm mx-auto">
+                <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, var(--wheat))" }} />
+                <span style={{ color: "var(--wheat)" }}>✦</span>
+                <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, var(--wheat))" }} />
+              </div>
+              <p className="font-body mt-4 text-base max-w-lg mx-auto" style={{ color: "var(--bark)" }}>
+                Леса и водоёмы вокруг Холмечи — дом для множества птиц, многие из которых занесены в Красную книгу
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {BIRDS.map((bird, i) => (
+                <div key={i} className="section-card overflow-hidden group cursor-default">
+                  <div className="relative overflow-hidden" style={{ height: "200px" }}>
+                    <img
+                      src={bird.photo}
+                      alt={bird.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(92,61,46,0.6) 0%, transparent 50%)" }} />
+                    <div className="absolute bottom-3 left-4">
+                      <div className="font-body text-xs italic" style={{ color: "rgba(245,239,224,0.75)" }}>{bird.latin}</div>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-display text-xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{bird.name}</h4>
+                    <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>{bird.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
