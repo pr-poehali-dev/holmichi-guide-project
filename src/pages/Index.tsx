@@ -82,6 +82,7 @@ const NATURE_ITEMS = [
   { emoji: "🍄", title: "Грибные места", desc: "Смешанные леса вокруг посёлка богаты белыми грибами, подосиновиками и лисичками — особенно урожайно в конце лета и осенью." },
   { emoji: "🐟", title: "Рыбалка", desc: "Река и местные водоёмы привлекают любителей рыбалки. Тихое утро с удочкой на берегу — одно из главных удовольствий отдыха в Холмечи." },
   { emoji: "🦅", title: "Богатый птичий мир", desc: "В лесах и на лугах обитают десятки видов птиц. Ранним утром лес наполняется пением — настоящее удовольствие для тех, кто любит природу." },
+  { emoji: "🦋", title: "Насекомые", desc: "Луга и леса вокруг Холмечей кишат жизнью — бабочки, стрекозы, шмели и редкие жуки, занесённые в Красную книгу." },
 ];
 
 const BIRDS = [
@@ -159,6 +160,45 @@ const FLORA = [
     latin: "Pteridium aquilinum",
     photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/2adb53b1-5e07-4ff7-bae5-2d7c27fdc95b.jpg",
     desc: "Древнейшее растение планеты, ковром устилающее лесные поляны. Придаёт лесу сказочный вид.",
+  },
+];
+
+const INSECTS = [
+  {
+    name: "Махаон",
+    latin: "Papilio machaon",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/7b731220-7079-48b3-8987-466c6600775e.jpg",
+    desc: "Одна из самых красивых бабочек России. Занесена в Красную книгу, обитает на лесных опушках и лугах.",
+  },
+  {
+    name: "Жук-олень",
+    latin: "Lucanus cervus",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/adda2422-1ebf-43c6-be2f-599996ce9d44.jpg",
+    desc: "Крупнейший жук Европы, занесён в Красную книгу. Живёт в старых дубовых лесах, активен в июне–июле.",
+  },
+  {
+    name: "Шмель",
+    latin: "Bombus terrestris",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/d1a3cc26-81ca-45b5-abb1-7340450d5ef8.jpg",
+    desc: "Главный опылитель лесных и луговых цветов. Его мохнатое тельце и низкое гудение — голос лета в Холмечах.",
+  },
+  {
+    name: "Стрекоза",
+    latin: "Aeshna cyanea",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/79a3186c-7ced-429c-96fa-24ef889ee10e.jpg",
+    desc: "Виртуозный летун у воды. Охотится на мелких насекомых прямо в полёте, украшает берега рек и прудов.",
+  },
+  {
+    name: "Светлячок",
+    latin: "Lampyris noctiluca",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/66846b73-06db-446b-a5d9-31f42eb76b29.jpg",
+    desc: "Волшебное зрелище летних ночей — светлячки мерцают в траве и кустах, создавая сказочную атмосферу.",
+  },
+  {
+    name: "Божья коровка",
+    latin: "Coccinella septempunctata",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/c218c8a2-e1ba-4471-956b-87013bc7286a.jpg",
+    desc: "Любимица детей и друг садоводов. Уничтожает тлю на растениях, встречается повсюду с мая по сентябрь.",
   },
 ];
 
@@ -409,6 +449,43 @@ export default function Index() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {FLORA.map((item, i) => (
+                <div key={i} className="section-card overflow-hidden group cursor-default">
+                  <div className="relative overflow-hidden" style={{ height: "200px" }}>
+                    <img
+                      src={item.photo}
+                      alt={item.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(92,61,46,0.6) 0%, transparent 50%)" }} />
+                    <div className="absolute bottom-3 left-4">
+                      <div className="font-body text-xs italic" style={{ color: "rgba(245,239,224,0.75)" }}>{item.latin}</div>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-display text-xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{item.name}</h4>
+                    <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Насекомые */}
+          <div className="mt-20">
+            <div className="text-center mb-10">
+              <span className="font-handwritten text-2xl" style={{ color: "var(--moss)" }}>жизнь под ногами</span>
+              <h3 className="font-display font-bold mt-2 text-4xl" style={{ color: "var(--earth)" }}>Насекомые Холмечей</h3>
+              <div className="flex items-center justify-center gap-4 mt-4 max-w-sm mx-auto">
+                <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, var(--wheat))" }} />
+                <span style={{ color: "var(--wheat)" }}>✦</span>
+                <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, var(--wheat))" }} />
+              </div>
+              <p className="font-body mt-4 text-base max-w-lg mx-auto" style={{ color: "var(--bark)" }}>
+                Луга и леса вокруг Холмечей — настоящий рай для насекомых, среди которых немало редких и охраняемых видов
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {INSECTS.map((item, i) => (
                 <div key={i} className="section-card overflow-hidden group cursor-default">
                   <div className="relative overflow-hidden" style={{ height: "200px" }}>
                     <img
