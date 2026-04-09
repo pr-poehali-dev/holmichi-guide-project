@@ -347,22 +347,22 @@ export default function Index() {
                 <p className="font-body text-xs mt-0.5" style={{ color: "var(--bark)" }}>Брянская область, Суземский район</p>
               </div>
             </div>
-            <div className="relative" style={{ height: "420px" }}>
+            <div className="relative" style={{ height: "460px" }}>
               <iframe
                 title="Карта посёлка Холмечи"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=34.2200%2C52.5400%2C34.2900%2C52.5750&layer=mapnik&marker=52.5575%2C34.2550"
+                src="https://yandex.ru/map-widget/v1/?ll=34.255%2C52.558&z=14&l=map&pt=34.255%2C52.558%2Cpm2rdm"
                 className="w-full h-full border-0"
-                style={{ filter: "sepia(15%) saturate(90%)" }}
+                allowFullScreen
               />
               <div className="absolute bottom-3 right-3">
                 <a
-                  href="https://www.openstreetmap.org/#map=14/52.5575/34.2550"
+                  href="https://yandex.ru/maps/?ll=34.255%2C52.558&z=14"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-body text-xs px-3 py-1.5 rounded-full shadow transition-opacity hover:opacity-80"
                   style={{ backgroundColor: "rgba(245,239,224,0.95)", color: "var(--earth)", border: "1px solid var(--wheat)" }}
                 >
-                  Открыть на карте →
+                  Открыть в Яндекс Картах →
                 </a>
               </div>
             </div>
