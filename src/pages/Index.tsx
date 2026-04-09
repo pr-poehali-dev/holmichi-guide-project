@@ -19,10 +19,48 @@ const SIGHTS = [
 ];
 
 const HISTORY_CARDS = [
-  { year: "XII век", title: "Основание", text: "Первые упоминания о поселении в летописных источниках. Название происходит от слова «холм»." },
-  { year: "XVII век", title: "Расцвет", text: "Деревня становится важным торговым узлом. Строятся первые каменные постройки." },
-  { year: "XIX век", title: "Золотой век", text: "Активное строительство, купеческие усадьбы, приход церкви. Население достигает тысячи человек." },
-  { year: "Сегодня", title: "Возрождение", text: "Сохранение исторического наследия, развитие туризма и возвращение молодёжи на родину." },
+  {
+    year: "Конец XIX века",
+    title: "Рождение посёлка",
+    text: "Холмечи возникли на месте стоянки артели лесорубов из деревни Холмечь Брасовского края. Густые брянские леса привлекали заготовителей, и временный лагерь постепенно превратился в постоянное поселение.",
+    icon: "🪓",
+  },
+  {
+    year: "1897 год",
+    title: "Железная дорога",
+    text: "Строительство железнодорожной ветки Навля — Конотоп дало посёлку новый импульс роста. Лесозаготовки вышли на промышленный масштаб, появились новые жители и постройки. Посёлок входил в приход Макарьевской церкви села Крупец.",
+    icon: "🚂",
+  },
+  {
+    year: "1920 год",
+    title: "Советская власть",
+    text: "С образованием Брянской губернии Холмечи вошли в состав Холмечского сельского совета Крупецкой волости Севского уезда. Начиналась новая административная жизнь посёлка.",
+    icon: "📋",
+  },
+  {
+    year: "1929 год",
+    title: "Западная область",
+    text: "После создания Западной области с центром в Смоленске посёлок перешёл в состав Гаврилово-Гутского сельсовета Суземского района Брянского округа. Лесная промышленность продолжала развиваться.",
+    icon: "🗺️",
+  },
+  {
+    year: "1937 год",
+    title: "Орловская область",
+    text: "27 сентября Западная область была расформирована. Холмечи оказались в составе Холмечского сельсовета Суземского района уже Орловской области — очередная страница административных перемен.",
+    icon: "📜",
+  },
+  {
+    year: "1944 год",
+    title: "Брянская область",
+    text: "5 июля 1944 года была образована Брянская область. Посёлок вернулся в состав Холмечского сельсовета Суземского района — теперь уже окончательно как часть Брянщины.",
+    icon: "🏛️",
+  },
+  {
+    year: "Сегодня",
+    title: "Наши дни",
+    text: "Холмечи сохраняют связь с лесным прошлым. Посёлок живёт в окружении брянских лесов, хранит память о лесорубах-первопоселенцах и железнодорожной истории края.",
+    icon: "🌲",
+  },
 ];
 
 const NATURE_ITEMS = [
@@ -149,20 +187,51 @@ export default function Index() {
 
           <div className="relative">
             {/* Вертикальная линия */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px hidden md:block -translate-x-1/2" style={{ background: "linear-gradient(to bottom, transparent, var(--wheat) 10%, var(--wheat) 90%, transparent)" }} />
-            <div className="space-y-10">
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2" style={{ background: "linear-gradient(to bottom, transparent, var(--wheat) 5%, var(--wheat) 95%, transparent)" }} />
+            <div className="space-y-8">
               {HISTORY_CARDS.map((card, i) => (
-                <div key={i} className={`flex ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-8 md:gap-0`}>
-                  <div className="flex-1">
-                    <div className={`section-card p-7 ${i % 2 === 0 ? "md:mr-16" : "md:ml-16"}`}>
-                      <div className="font-handwritten text-3xl mb-1" style={{ color: "var(--wheat)" }}>{card.year}</div>
-                      <h3 className="font-display text-2xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{card.title}</h3>
-                      <p className="font-body text-base leading-relaxed" style={{ color: "var(--bark)" }}>{card.text}</p>
+                <div key={i} className={`flex ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-start gap-0 md:gap-0`}>
+                  {/* Мобиль: иконка + карточка в ряд */}
+                  <div className="flex md:hidden items-start gap-4 pl-2 w-full">
+                    <div className="flex flex-col items-center flex-shrink-0 mt-1">
+                      <div className="w-9 h-9 rounded-full flex items-center justify-center text-base z-10 shadow border-2 flex-shrink-0" style={{ backgroundColor: "var(--cream)", borderColor: "var(--wheat)" }}>
+                        {card.icon}
+                      </div>
+                    </div>
+                    <div className="section-card p-5 flex-1">
+                      <div className="font-handwritten text-2xl mb-0.5" style={{ color: "var(--wheat)" }}>{card.year}</div>
+                      <h3 className="font-display text-xl font-semibold mb-1.5" style={{ color: "var(--earth)" }}>{card.title}</h3>
+                      <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>{card.text}</p>
                     </div>
                   </div>
-                  {/* Точка на линии */}
-                  <div className="hidden md:flex w-4 h-4 rounded-full border-2 flex-shrink-0 z-10 animate-pulse-glow" style={{ backgroundColor: "var(--cream)", borderColor: "var(--wheat)" }} />
-                  <div className="flex-1" />
+
+                  {/* Десктоп: чередование сторон */}
+                  <div className="hidden md:flex flex-1">
+                    {i % 2 === 0 ? (
+                      <div className="section-card p-7 mr-10 ml-auto w-full max-w-md">
+                        <div className="font-handwritten text-2xl mb-1" style={{ color: "var(--wheat)" }}>{card.year}</div>
+                        <h3 className="font-display text-2xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{card.title}</h3>
+                        <p className="font-body text-base leading-relaxed" style={{ color: "var(--bark)" }}>{card.text}</p>
+                      </div>
+                    ) : <div className="max-w-md w-full" />}
+                  </div>
+
+                  {/* Точка на линии (десктоп) */}
+                  <div className="hidden md:flex flex-col items-center flex-shrink-0 pt-6 z-10">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-md border-2" style={{ backgroundColor: "var(--cream)", borderColor: "var(--wheat)" }}>
+                      {card.icon}
+                    </div>
+                  </div>
+
+                  <div className="hidden md:flex flex-1">
+                    {i % 2 !== 0 ? (
+                      <div className="section-card p-7 ml-10 mr-auto w-full max-w-md">
+                        <div className="font-handwritten text-2xl mb-1" style={{ color: "var(--wheat)" }}>{card.year}</div>
+                        <h3 className="font-display text-2xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{card.title}</h3>
+                        <p className="font-body text-base leading-relaxed" style={{ color: "var(--bark)" }}>{card.text}</p>
+                      </div>
+                    ) : <div className="max-w-md w-full" />}
+                  </div>
                 </div>
               ))}
             </div>
