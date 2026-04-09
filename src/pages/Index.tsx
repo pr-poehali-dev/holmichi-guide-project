@@ -119,7 +119,46 @@ const BIRDS = [
     name: "Соловей",
     latin: "Luscinia luscinia",
     photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/e5ac99d2-3666-4133-9dfa-6439110321d4.jpg",
-    desc: "Знаменитый певец русских лесов. Прилетает в мае и наполняет окрестности Холмечи своими трелями.",
+    desc: "Знаменитый певец русских лесов. Прилетает в мае и наполняет окрестности Холмечей своими трелями.",
+  },
+];
+
+const FLORA = [
+  {
+    name: "Белый гриб",
+    latin: "Boletus edulis",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/ab7d0af6-ace5-44c6-9cac-9cd4c220842c.jpg",
+    desc: "Царь грибов брянских лесов. Растёт в сосновых и смешанных лесах с июня по октябрь.",
+  },
+  {
+    name: "Лисичка",
+    latin: "Cantharellus cibarius",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/23066dc1-4521-4065-9e35-1e2f2143f76e.jpg",
+    desc: "Яркий золотисто-жёлтый гриб, любимец грибников. Не бывает червивым, растёт целыми семьями.",
+  },
+  {
+    name: "Ландыш майский",
+    latin: "Convallaria majalis",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/581f6a53-5289-4737-97aa-360ece79d80f.jpg",
+    desc: "Нежный лесной цветок с тонким ароматом. Занесён в Красную книгу, цветёт в мае в тенистых лесах.",
+  },
+  {
+    name: "Черника",
+    latin: "Vaccinium myrtillus",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/26e3f75c-01e0-4ec6-b846-a49b164870e8.jpg",
+    desc: "Сочная лесная ягода, богатая витаминами. Созревает в июле—августе в сосновых борах.",
+  },
+  {
+    name: "Мухомор красный",
+    latin: "Amanita muscaria",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/03a3b2ca-b9e2-4da5-9018-fa953b8755cc.jpg",
+    desc: "Символ леса и важная часть экосистемы. Служит кормом для лесных животных и украшает осенний лес.",
+  },
+  {
+    name: "Папоротник орляк",
+    latin: "Pteridium aquilinum",
+    photo: "https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/files/2adb53b1-5e07-4ff7-bae5-2d7c27fdc95b.jpg",
+    desc: "Древнейшее растение планеты, ковром устилающее лесные поляны. Придаёт лесу сказочный вид.",
   },
 ];
 
@@ -328,7 +367,7 @@ export default function Index() {
                 <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, var(--wheat))" }} />
               </div>
               <p className="font-body mt-4 text-base max-w-lg mx-auto" style={{ color: "var(--bark)" }}>
-                Леса и водоёмы вокруг Холмечи — дом для множества птиц, многие из которых занесены в Красную книгу
+                Леса и водоёмы вокруг Холмечей — дом для множества птиц, многие из которых занесены в Красную книгу
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -348,6 +387,43 @@ export default function Index() {
                   <div className="p-5">
                     <h4 className="font-display text-xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{bird.name}</h4>
                     <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>{bird.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Грибы и растения */}
+          <div className="mt-20">
+            <div className="text-center mb-10">
+              <span className="font-handwritten text-2xl" style={{ color: "var(--moss)" }}>дары леса</span>
+              <h3 className="font-display font-bold mt-2 text-4xl" style={{ color: "var(--earth)" }}>Грибы и растения</h3>
+              <div className="flex items-center justify-center gap-4 mt-4 max-w-sm mx-auto">
+                <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, var(--wheat))" }} />
+                <span style={{ color: "var(--wheat)" }}>✦</span>
+                <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, var(--wheat))" }} />
+              </div>
+              <p className="font-body mt-4 text-base max-w-lg mx-auto" style={{ color: "var(--bark)" }}>
+                Брянские леса щедро одаривают грибами, ягодами и лекарственными растениями круглое лето
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {FLORA.map((item, i) => (
+                <div key={i} className="section-card overflow-hidden group cursor-default">
+                  <div className="relative overflow-hidden" style={{ height: "200px" }}>
+                    <img
+                      src={item.photo}
+                      alt={item.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(92,61,46,0.6) 0%, transparent 50%)" }} />
+                    <div className="absolute bottom-3 left-4">
+                      <div className="font-body text-xs italic" style={{ color: "rgba(245,239,224,0.75)" }}>{item.latin}</div>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-display text-xl font-semibold mb-2" style={{ color: "var(--earth)" }}>{item.name}</h4>
+                    <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
