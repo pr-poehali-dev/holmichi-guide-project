@@ -595,12 +595,11 @@ export default function Index() {
                 <p className="font-body text-xs mt-0.5" style={{ color: "var(--bark)" }}>Брянская область, Суземский район</p>
               </div>
             </div>
-            <div className="relative" style={{ height: "460px" }}>
-              <iframe
-                title="Карта посёлка Холмечи"
-                src="https://yandex.ru/map-widget/v1/?ll=34.255%2C52.558&z=14&l=map&pt=34.255%2C52.558%2Cpm2rdm"
-                className="w-full h-full border-0"
-                allowFullScreen
+            <div className="relative">
+              <img
+                src="https://cdn.poehali.dev/projects/7906f011-65d4-4c4c-a552-fdee1206d99d/bucket/a4334c0f-3ddf-4038-9a32-f491f8da998e.jpeg"
+                alt="Карта посёлка Холмечи"
+                className="w-full object-cover"
               />
               <div className="absolute bottom-3 right-3">
                 <a
