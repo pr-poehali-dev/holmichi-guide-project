@@ -224,7 +224,7 @@ export default function Index() {
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className="inline-block mb-4">
-            <span className="font-handwritten text-xl" style={{ color: "var(--wheat)" }}>деревня в сердце России</span>
+            <span className="font-handwritten text-xl" style={{ color: "var(--wheat)" }}>Деревня на границе России</span>
           </div>
           <h1 className="font-display font-bold mb-6 animate-fade-slide" style={{ color: "var(--cream)", textShadow: "0 4px 30px rgba(92,61,46,0.5)", lineHeight: 1, fontSize: "clamp(4rem, 12vw, 9rem)" }}>
             Холмечи
