@@ -10,12 +10,20 @@ const NAV_ITEMS = [
 ];
 
 const SIGHTS = [
-  { id: 1, name: "Церковь Николая Чудотворца", emoji: "⛪", x: 42, y: 30, desc: "Деревянная церковь XIX века, памятник архитектуры" },
-  { id: 2, name: "Старая мельница", emoji: "🌾", x: 65, y: 45, desc: "Восстановленная водяная мельница на реке" },
-  { id: 3, name: "Дуб-великан", emoji: "🌳", x: 28, y: 60, desc: "Трёхсотлетний дуб, символ деревни" },
-  { id: 4, name: "Родник «Серебряный»", emoji: "💧", x: 72, y: 25, desc: "Целебный источник у подножия холма" },
-  { id: 5, name: "Купеческий дом", emoji: "🏠", x: 50, y: 68, desc: "Усадьба купца Рябова, 1887 год" },
-  { id: 6, name: "Смотровой холм", emoji: "👁️", x: 18, y: 38, desc: "Панорамный вид на всю округу" },
+  {
+    id: 1,
+    name: "Братская могила",
+    emoji: "🕯️",
+    desc: "Захоронение 21 воина Советской Армии и партизан, павших в годы Великой Отечественной войны. Место памяти и скорби — символ мужества защитников Холмечи.",
+    detail: "Великая Отечественная война оставила глубокий след в судьбе посёлка. В братской могиле покоятся 21 солдат и партизан — те, кто ценой своей жизни защищал эту землю."
+  },
+  {
+    id: 2,
+    name: "Церковь Тихвинской иконы Божией Матери",
+    emoji: "⛪",
+    desc: "Православный храм посёлка Холмечи, посвящённый чудотворной Тихвинской иконе Божией Матери — одной из главных православных святынь России.",
+    detail: "Церковь является духовным центром Холмечи. Тихвинская икона Божией Матери издавна почитается как покровительница и заступница — особенно воинов и путников."
+  },
 ];
 
 const HISTORY_CARDS = [
@@ -281,104 +289,82 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Интерактивная карта */}
-            <div className="section-card p-2 overflow-hidden">
-              <div className="relative rounded-xl overflow-hidden" style={{ aspectRatio: "4/3", background: "linear-gradient(135deg, #d4e6c0 0%, #b8d4a0 25%, #8fba78 40%, #e0d4a8 60%, #d4c07a 75%, #c0a850 100%)" }}>
-                {/* SVG рельеф карты */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none">
-                  {/* Холмы */}
-                  <ellipse cx="80" cy="100" rx="70" ry="50" fill="#a8c890" opacity="0.4" />
-                  <ellipse cx="320" cy="80" rx="80" ry="55" fill="#a8c890" opacity="0.4" />
-                  {/* Лес */}
-                  <circle cx="55" cy="75" r="38" fill="#5a8050" opacity="0.45" />
-                  <circle cx="85" cy="58" r="28" fill="#4A6741" opacity="0.5" />
-                  <circle cx="335" cy="85" r="42" fill="#5a8050" opacity="0.45" />
-                  <circle cx="360" cy="65" r="28" fill="#4A6741" opacity="0.5" />
-                  {/* Река */}
-                  <path d="M 0 185 Q 70 165 115 188 Q 165 215 215 198 Q 275 178 335 198 Q 368 208 400 192" stroke="#7BA7BC" strokeWidth="9" fill="none" strokeLinecap="round" opacity="0.7" />
-                  {/* Поля */}
-                  <rect x="150" y="205" width="110" height="65" rx="5" fill="#D4C89A" opacity="0.55" />
-                  <rect x="270" y="215" width="85" height="55" rx="5" fill="#C4B478" opacity="0.5" />
-                  {/* Дороги */}
-                  <path d="M 200 0 L 198 300" stroke="#8B6347" strokeWidth="2.5" fill="none" strokeDasharray="7 4" opacity="0.45" />
-                  <path d="M 0 148 Q 200 155 400 148" stroke="#8B6347" strokeWidth="2.5" fill="none" strokeDasharray="7 4" opacity="0.45" />
-                  {/* Граница */}
-                  <rect x="1" y="1" width="398" height="298" fill="none" stroke="rgba(212,168,67,0.4)" strokeWidth="1.5" rx="8" />
-                </svg>
-
-                {/* Метки на карте */}
-                {SIGHTS.map((sight) => (
-                  <button
-                    key={sight.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-200 focus:outline-none"
-                    style={{ left: `${sight.x}%`, top: `${sight.y}%`, zIndex: selectedPin === sight.id ? 20 : 10 }}
-                    onClick={() => setSelectedPin(selectedPin === sight.id ? null : sight.id)}
-                    onMouseEnter={() => setHoveredPin(sight.id)}
-                    onMouseLeave={() => setHoveredPin(null)}
+          {/* Карточки достопримечательностей */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {SIGHTS.map((sight, i) => (
+              <div
+                key={sight.id}
+                className="section-card p-7 flex flex-col gap-4 cursor-pointer transition-all duration-200"
+                style={{
+                  outline: selectedPin === sight.id ? "2px solid var(--wheat)" : "2px solid transparent",
+                }}
+                onClick={() => setSelectedPin(selectedPin === sight.id ? null : sight.id)}
+              >
+                <div className="flex items-start gap-4">
+                  <div
+                    className="text-4xl flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm"
+                    style={{ backgroundColor: "var(--fog)" }}
                   >
-                    <div className={`relative flex flex-col items-center transition-transform duration-200 ${hoveredPin === sight.id || selectedPin === sight.id ? "scale-125" : "scale-100"}`}>
-                      <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center text-base shadow-lg border-2"
-                        style={{
-                          backgroundColor: selectedPin === sight.id ? "var(--wheat)" : "rgba(245,239,224,0.95)",
-                          borderColor: selectedPin === sight.id ? "var(--earth)" : "var(--wheat)",
-                        }}
-                      >
-                        {sight.emoji}
-                      </div>
-                      {/* Попап */}
-                      {selectedPin === sight.id && (
-                        <div
-                          className="absolute bottom-12 left-1/2 -translate-x-1/2 rounded-xl px-4 py-3 shadow-2xl text-left pointer-events-none animate-fade-slide"
-                          style={{ backgroundColor: "var(--cream)", border: "1px solid var(--wheat)", width: "180px", minWidth: "180px" }}
-                        >
-                          <div className="font-display text-sm font-semibold mb-1" style={{ color: "var(--earth)" }}>{sight.name}</div>
-                          <div className="font-body text-xs leading-relaxed" style={{ color: "var(--bark)" }}>{sight.desc}</div>
-                          <div className="absolute" style={{ bottom: "-6px", left: "50%", transform: "translateX(-50%) rotate(45deg)", width: "10px", height: "10px", backgroundColor: "var(--cream)", borderRight: "1px solid var(--wheat)", borderBottom: "1px solid var(--wheat)" }} />
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                ))}
-
-                {/* Компас */}
-                <div className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm shadow-md" style={{ backgroundColor: "rgba(245,239,224,0.95)", color: "var(--earth)", border: "1px solid var(--wheat)", fontFamily: "'Cormorant', serif" }}>
-                  С
-                </div>
-                {/* Подпись карты */}
-                <div className="absolute bottom-3 left-3 font-handwritten text-sm px-3 py-1 rounded-full shadow" style={{ backgroundColor: "rgba(245,239,224,0.9)", color: "var(--earth)" }}>
-                  карта Холмечи
-                </div>
-              </div>
-              <p className="font-body text-xs text-center py-3" style={{ color: "var(--bark)" }}>
-                Нажмите на метку, чтобы узнать подробнее
-              </p>
-            </div>
-
-            {/* Список достопримечательностей */}
-            <div className="space-y-3">
-              {SIGHTS.map((sight, i) => (
-                <button
-                  key={sight.id}
-                  className="section-card p-5 flex items-center gap-4 w-full text-left transition-all duration-200"
-                  style={{
-                    outline: selectedPin === sight.id ? `2px solid var(--wheat)` : "2px solid transparent",
-                  }}
-                  onClick={() => setSelectedPin(selectedPin === sight.id ? null : sight.id)}
-                  onMouseEnter={() => setHoveredPin(sight.id)}
-                  onMouseLeave={() => setHoveredPin(null)}
-                >
-                  <div className="text-3xl flex-shrink-0">{sight.emoji}</div>
+                    {sight.emoji}
+                  </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-display text-lg font-semibold" style={{ color: "var(--earth)" }}>{sight.name}</div>
-                    <div className="font-body text-sm mt-0.5 line-clamp-1" style={{ color: "var(--bark)" }}>{sight.desc}</div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span
+                        className="font-body text-xs font-semibold px-2 py-0.5 rounded-full"
+                        style={{ backgroundColor: "var(--wheat)", color: "var(--earth)" }}
+                      >
+                        №{i + 1}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-xl font-semibold leading-tight" style={{ color: "var(--earth)" }}>
+                      {sight.name}
+                    </h3>
                   </div>
-                  <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold font-body" style={{ backgroundColor: "var(--fog)", color: "var(--moss)" }}>
-                    {i + 1}
+                </div>
+                <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>
+                  {sight.desc}
+                </p>
+                {selectedPin === sight.id && (
+                  <div
+                    className="rounded-xl p-4 mt-1 animate-fade-slide"
+                    style={{ backgroundColor: "var(--fog)", borderLeft: "3px solid var(--wheat)" }}
+                  >
+                    <p className="font-body text-sm leading-relaxed" style={{ color: "var(--earth)" }}>
+                      {sight.detail}
+                    </p>
                   </div>
-                </button>
-              ))}
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Карта посёлка */}
+          <div className="section-card overflow-hidden p-0">
+            <div className="px-7 pt-6 pb-4 flex items-center gap-3" style={{ borderBottom: "1px solid rgba(212,168,67,0.25)" }}>
+              <span className="text-2xl">🗺️</span>
+              <div>
+                <h3 className="font-display text-xl font-semibold" style={{ color: "var(--earth)" }}>Карта посёлка Холмечи</h3>
+                <p className="font-body text-xs mt-0.5" style={{ color: "var(--bark)" }}>Брянская область, Суземский район</p>
+              </div>
+            </div>
+            <div className="relative" style={{ height: "420px" }}>
+              <iframe
+                title="Карта посёлка Холмечи"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=34.2200%2C52.5400%2C34.2900%2C52.5750&layer=mapnik&marker=52.5575%2C34.2550"
+                className="w-full h-full border-0"
+                style={{ filter: "sepia(15%) saturate(90%)" }}
+              />
+              <div className="absolute bottom-3 right-3">
+                <a
+                  href="https://www.openstreetmap.org/#map=14/52.5575/34.2550"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-xs px-3 py-1.5 rounded-full shadow transition-opacity hover:opacity-80"
+                  style={{ backgroundColor: "rgba(245,239,224,0.95)", color: "var(--earth)", border: "1px solid var(--wheat)" }}
+                >
+                  Открыть на карте →
+                </a>
+              </div>
             </div>
           </div>
         </div>
