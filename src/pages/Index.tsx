@@ -15,6 +15,7 @@ const SIGHTS = [
     name: "Братская могила",
     emoji: "🕯️",
     address: "ул. Будённого, пос. Холмечи",
+    mapUrl: "https://yandex.ru/maps/?text=улица+Будённого+посёлок+Холмечи+Брянская+область",
     desc: "Захоронение 21 воина Советской Армии и партизан, павших в годы Великой Отечественной войны. Место памяти и скорби — символ мужества защитников Холмечи.",
     detail: "Великая Отечественная война оставила глубокий след в судьбе посёлка. В братской могиле покоятся 21 солдат и партизан — те, кто ценой своей жизни защищал эту землю."
   },
@@ -23,6 +24,7 @@ const SIGHTS = [
     name: "Церковь Тихвинской иконы Божией Матери",
     emoji: "⛪",
     address: "Вокзальная улица, 11, пос. Холмечи",
+    mapUrl: "https://yandex.ru/maps/?text=Вокзальная+улица+11+посёлок+Холмечи+Брянская+область",
     desc: "Православный храм посёлка Холмечи, посвящённый чудотворной Тихвинской иконе Божией Матери — одной из главных православных святынь России.",
     detail: "Церковь является духовным центром Холмечи. Тихвинская икона Божией Матери издавна почитается как покровительница и заступница — особенно воинов и путников. Настоятель храма — отец Андрей Масленников."
   },
@@ -321,10 +323,16 @@ export default function Index() {
                     <h3 className="font-display text-xl font-semibold leading-tight" style={{ color: "var(--earth)" }}>
                       {sight.name}
                     </h3>
-                    <div className="flex items-center gap-1 mt-1">
+                    <a
+                      href={sight.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 mt-1 hover:opacity-70 transition-opacity"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <span className="text-xs">📍</span>
-                      <span className="font-body text-xs" style={{ color: "var(--bark)" }}>{sight.address}</span>
-                    </div>
+                      <span className="font-body text-xs underline underline-offset-2" style={{ color: "var(--wheat)" }}>{sight.address}</span>
+                    </a>
                   </div>
                 </div>
                 <p className="font-body text-sm leading-relaxed" style={{ color: "var(--bark)" }}>
